@@ -4,7 +4,77 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
-## RESUME HERE — end of session 2026-07-04
+## RESUME HERE — end of session 2026-07-05
+
+**Charger sheet shipped today** as commit `8c2cb62` on `main`. IP2326 +
+support network, 19 components, ERC clean apart from cosmetic
+Unspecified/Passive pin-type warnings from the IP2326 library symbol.
+
+### charger.kicad_sch state
+
+- **19 components**: U1 (IP2326, VQFN-24, C2832094), L1 (2.2 µH boost
+  inductor), C1 (10 µF Cin @ VBUS_9V), C2/C3 (2× 22 µF @ VSYS), C4
+  (10 µF Cout @ VOUT), C5 (100 nF bootstrap), R1 (VSET), TH1 + R2 (NTC
+  divider), R3 (BAT_STAT pull-up), D1 + R10 (charge LED, 4.7 kΩ series),
+  R4 (TIME_SET), R5 (VIN_UVSET), R6 (VIN_OVSET), **R7 (CON_SEL = 1 kΩ
+  to GND → 3S mode)**, R8 (ISET), R9 (EN pull-up to VBUS_9V).
+- **Pins 1/2 (D+/D-) and 23/24 (VBATM/VBAT_GND) NC** per REQUIREMENTS
+  resolution — PD goes through CH224K on input sheet, BQ76920 handles
+  cell balancing.
+- **All resistor values are TBD placeholders** (10 k / 100 k / 4.7 k /
+  1 k). Verify against IP2326 §10 typical circuit before layout — the
+  ratio-based ones (ISET, VSET, VIN_UVSET, VIN_OVSET, TIME_SET) all
+  need real calculation, not defaults.
+- **Cross-sheet nets** exported as globals: VBUS_9V (from input), BAT+
+  (to bms + buckboost — same rail as BQ76920's pack side), GND.
+
+### Layout lesson learned — schematic pin-collision
+
+**Vertical spacing between passive components on the same X must be
+≥15.24 mm** (or offset X between adjacent neighbors). The 7.62 mm pin
+span + 2.54 mm label stubs mean 10 mm spacing bridges nets — the two
+stubs meet in the middle at ~y=(y_a + y_b)/2, and any two labels
+placed there merge onto the same electrical net. Killed the first
+charger draft; had to nuke-and-restart the sheet with a 15.24 mm grid.
+
+Same lesson applies to future dense sheets. If you *need* tight
+vertical packing, alternate X positions between adjacent components.
+
+### All four sheets shipped + full-project ERC clean
+
+- **input.kicad_sch** (`5b82f16`, main): 16-pin USB-C receptacle
+  (charge-only), CH224K strapped for 9 V PDO via 24 kΩ CFG1 → GND,
+  SRV05-4 ESD on CC1/CC2, SMAJ12A TVS on VBUS_RAW, 600 Ω ferrite between
+  VBUS_RAW and VBUS_9V. Sheet ERC clean.
+- **buckboost.kicad_sch** re-drafted (`768c2f2`, main): the yesterday
+  draft had the same too-tight vertical stacking bug as the first
+  charger draft — the label stubs bridged BAT+ ↔ GND ↔ VCC ↔
+  LM5176_VCC/BIAS ↔ COMP ↔ RT into one 31-pin mega-net. Nuke-and-
+  restart at 15.24 mm grid fixed it. Also resolved the yesterday-TBDs:
+  CS/CSG via Rds(on) sensing (dropped R8 shunt), SLOPE = 10 kΩ
+  placeholder, PGOOD/DITH NC, MODE to GND for auto PFM/PWM.
+- **Full-project ERC** (`768c2f2`): 0 errors, 34 warnings — all
+  cosmetic. Design is schematic-clean.
+
+### Still to do
+
+- **Autoplacer #61** — deferred; sheets are readable without it.
+- **Buckboost polish** — R5 SLOPE value TBD per LM5176 §9.3.7 (need
+  final Fsw/L1 pick). Q1-Q4 still generic 30V/20A_NFET placeholders;
+  final MPN pick due before layout (candidates in yesterday's NOTES
+  block: AO4406 / AON7418 / CSD17559Q5). R1/R2 FB divider is exact
+  110k/10k → 12.0 V; verify at real load.
+- **PCB drafting** — annotate_schematic + BOM + sync_schematic_to_board
+  → freerouting. Not yet started.
+
+### Charger sheet — still open
+
+- **Config resistor values are TBD placeholders** (VSET, NTC pull-up,
+  BAT_STAT pull-up, LED series R, TIME_SET, VIN_UVSET, VIN_OVSET, ISET,
+  EN pull-up). Verify against IP2326 §10 typical reference circuit
+  before layout. CON_SEL (R7 = 1 kΩ → GND) is locked for 3S mode.
+
+## RESUME HERE — end of session 2026-07-04 (previous)
 
 **Two things happened today.** (1) `bms.kicad_sch` populated (27
 components, 21 nets — BQ76920 + 3S cell holder + external FET stack
