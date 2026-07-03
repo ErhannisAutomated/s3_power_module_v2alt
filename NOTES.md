@@ -4,7 +4,88 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
-## RESUME HERE — end of session 2026-07-03
+## RESUME HERE — end of session 2026-07-04
+
+**Two things happened today.** (1) `bms.kicad_sch` populated (27
+components, 21 nets — BQ76920 + 3S cell holder + external FET stack
++ cell-sense R/C/TVS network + I²C header). (2) A new MCP tool
+**`autoplace_schematic`** was built in `KiCAD-MCP-Server` because
+hand-laying the dense sense-R + differential-cap cluster ran into
+label-stub collisions repeatedly. The tool ran end-to-end but with
+caveats — see below.
+
+### bms.kicad_sch state
+
+- **27 components placed and wired** (labels + no-connect for U1.11
+  NC pin). ERC clean apart from 2 errors: `BAT+` and `GND` global
+  labels not driven yet (charger + input sheets will provide/consume).
+- **Placement is SPARSE** (~245×155 mm, filling the sheet) rather than
+  compact (~46×105 target). Autoplacer's staged-anneal recipe was
+  slightly over-spread; the layout is functional but not visually
+  polished. Autoplacer refinement is task #61.
+- **Same architecture pattern as v1**: `BAT-` (pack pre-Rsns) → `R9`
+  (5 mΩ shunt) → BQ76920 VSS+SRN + Q1(DSG).S; Q1.D + Q2.D = `MID`;
+  Q2.S = global `GND`. FET Q1/Q2 are 30V/20A_NFET placeholders (same
+  as buckboost — pick one MPN that covers both when we lock parts).
+- **v2 additions vs v1**: 15V TVS on VC1/VC2/VC3 cell-sense lines
+  (D1/D2/D3), 100nF differential cell-sense caps (v1 had 1nF —
+  probably too small per TI EVM), 5-pin I²C+ALERT breakout header.
+- **buckboost.kicad_sch review** from yesterday still open. User
+  looked at it (session start) and said layout will need autoplacer
+  before it reads cleanly. Same fix applies once the autoplacer is
+  tuned.
+
+### autoplace_schematic MCP tool
+
+- **Files changed**: `KiCAD-MCP-Server/python/kicad_interface.py`
+  (`_handle_autoplace_schematic` + dispatch entry) and
+  `src/tools/placement.ts` (TS registration). `npm run build` +
+  `/mcp` restart to load.
+- **Handler wraps** `PLACER.load → set_params → recipe → apply`. Takes
+  `dryRun`, `rewire`, `previewPath`, plus compact-profile knobs
+  (`repulsionK`, `attractionK`, `polarityK`, `rotationK`,
+  `initialTemperature`) and full recipe overrides.
+- **Known caveats** (task #61):
+  1. Rewire step in `apply` claims success ("34 pairs wired") but
+     leaves the file with NO labels/wires. Had to re-wire the bms
+     sheet manually with `connect_pins` after autoplace. Symptom on
+     disk: 0 wires + 0 labels after apply. Bug likely in
+     `rewire_session` — the rewire result dict doesn't reflect what
+     ends up in the file.
+  2. Layout is looser than the memory's compact_v3 profile suggests
+     (`[[feedback-autoplacer-params]]`). Even with the passthrough
+     fix, the recipe's spread stage fans components out to fill the
+     sheet. Might need lower `repulsionK` or tighter sheet bounds.
+  3. **First call sometimes times out**. The 30 s MCP call ceiling
+     is enough for the ~330-iter recipe + apply on ~30 components,
+     but only just. Reducing iterations (`clusterIters=40,
+     spreadStages=5, polarizeStages=1, settleIters=40,
+     itersPerStage=5`) keeps it well under.
+- **Preview mode**: pass `dryRun=true` + `previewPath` to write the
+  annealed positions to a sibling file for visual review. Preview
+  file uses `strip_connections=False` so labels stay from the
+  original — expect visually noisy render (labels at old positions,
+  components at new). Useful for coord-check, not final review.
+
+### v1 workflow-checklist for schematic autoplace (proven pattern)
+
+The bms flow that worked:
+
+1. Place all components at rough starting coords (no need to hand-
+   optimise — autoplacer will move them; just avoid pin-coord
+   collisions by spacing >7.62 mm apart).
+2. Wire everything with `connect_pins(style="label")` — one call per
+   net. For failures (e.g. dense pin clusters), fall back to
+   per-pin `add_schematic_net_label` with `componentRef` + `pinNumber`.
+   Add `no_connect` for intentional NC pins.
+3. Add global labels for cross-sheet nets (BAT+, GND, etc.) via
+   `add_schematic_net_label(labelType="global_label")`.
+4. Run `autoplace_schematic` with compact params + reduced iterations.
+5. **After autoplace, re-run step 2 to restore labels/wires** — the
+   current apply/rewire flow strips them silently (#61).
+6. `run_erc` to validate.
+
+## RESUME HERE — end of session 2026-07-03 (previous)
 
 **Anti-anchoring experiment is closed; this project is now the "build v2"
 schematic pass** using the architecture v2-alt landed on. Read the three
