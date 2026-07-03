@@ -78,32 +78,8 @@
 
 (symbol "LED_1_1" (pin passive line (at -3.81 0 0) (length 2.54) (name "K" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27))))) (pin passive line (at 3.81 0 180) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))))) 
 
-(symbol (lib_id "Device:R") (at -100 -100 0) (unit 1) (in_bom no) (on_board no) (dnp yes) (uuid 00000000-0000-0000-0000-000000000001) 
+ 
 
-(property "Reference" "_TEMPLATE_R" (at -100 -102.54 0) (effects (font (size 1.27 1.27)))) 
+ 
 
-(property "Value" "R_TEMPLATE" (at -100 -100 90) (effects (font (size 1.27 1.27)))) 
-
-(property "Footprint" "" (at -100 -100 90) (effects (font (size 1.27 1.27)) hide)) 
-
-(property "Datasheet" "~" (at -100 -100 0) (effects (font (size 1.27 1.27)) hide)) (pin "1" (uuid 00000000-0000-0000-0000-000000000010)) (pin "2" (uuid 00000000-0000-0000-0000-000000000011))) 
-
-(symbol (lib_id "Device:C") (at -100 -110 0) (unit 1) (in_bom no) (on_board no) (dnp yes) (uuid 00000000-0000-0000-0000-000000000002) 
-
-(property "Reference" "_TEMPLATE_C" (at -100 -107.46 0) (effects (font (size 1.27 1.27)))) 
-
-(property "Value" "C_TEMPLATE" (at -100 -112.54 0) (effects (font (size 1.27 1.27)))) 
-
-(property "Footprint" "" (at -100 -110 0) (effects (font (size 1.27 1.27)) hide)) 
-
-(property "Datasheet" "~" (at -100 -110 0) (effects (font (size 1.27 1.27)) hide)) (pin "1" (uuid 00000000-0000-0000-0000-000000000020)) (pin "2" (uuid 00000000-0000-0000-0000-000000000021))) 
-
-(symbol (lib_id "Device:LED") (at -100 -120 0) (unit 1) (in_bom no) (on_board no) (dnp yes) (uuid 00000000-0000-0000-0000-000000000003) 
-
-(property "Reference" "_TEMPLATE_D" (at -100 -117.46 0) (effects (font (size 1.27 1.27)))) 
-
-(property "Value" "LED_TEMPLATE" (at -100 -122.54 0) (effects (font (size 1.27 1.27)))) 
-
-(property "Footprint" "" (at -100 -120 0) (effects (font (size 1.27 1.27)) hide)) 
-
-(property "Datasheet" "~" (at -100 -120 0) (effects (font (size 1.27 1.27)) hide)) (pin "1" (uuid 00000000-0000-0000-0000-000000000030)) (pin "2" (uuid 00000000-0000-0000-0000-000000000031))) (sheet_instances (path "/" (page "1"))))
+ (sheet_instances (path "/" (page "1"))))
