@@ -58,12 +58,29 @@ vertical packing, alternate X positions between adjacent components.
 
 ### Still to do
 
-- **Autoplacer #61** — deferred; sheets are readable without it.
+- **Autoplacer #61** (bug fix) — apply/rewire silently strips
+  labels+wires + compact profile still over-spreads. Blocks the
+  autoplace pass on charger/input/buckboost (#63) and the label→wire
+  conversion (#64) after that.
+- **#63 Autoplace pass** — all four sheets are laid on a manual
+  15.24 mm grid, not autoplaced. Also, the bms autoplace from
+  yesterday over-spread to 245×155 mm (target ~46×105 per compact_v3).
+  Once #61 lands, re-run on all four. Blocked by #61.
+- **#64 Label → routed wire conversion** — every net on every sheet
+  is currently `connect_pins(style="label")`, i.e. label per pin, not
+  routed. Per `[[feedback_schematic_routing]]` the default is
+  `style="auto"` with labels only as fallback (and always for power
+  nets). Re-run each net through `connect_pins(style="auto")` after
+  #63 stabilises coords. Blocked by #63.
 - **Buckboost polish** — R5 SLOPE value TBD per LM5176 §9.3.7 (need
   final Fsw/L1 pick). Q1-Q4 still generic 30V/20A_NFET placeholders;
   final MPN pick due before layout (candidates in yesterday's NOTES
   block: AO4406 / AON7418 / CSD17559Q5). R1/R2 FB divider is exact
   110k/10k → 12.0 V; verify at real load.
+- **Charger polish** — config-R values (VSET / NTC / BAT_STAT / LED
+  series / TIME_SET / VIN_UVSET / VIN_OVSET / ISET / EN) are TBD
+  placeholders; verify against IP2326 §10 typical circuit before
+  layout. CON_SEL (R7 = 1 kΩ) is locked for 3S.
 - **PCB drafting** — annotate_schematic + BOM + sync_schematic_to_board
   → freerouting. Not yet started.
 
@@ -137,23 +154,45 @@ caveats — see below.
   original — expect visually noisy render (labels at old positions,
   components at new). Useful for coord-check, not final review.
 
-### v1 workflow-checklist for schematic autoplace (proven pattern)
+### Schematic workflow-checklist (current best-known state)
 
-The bms flow that worked:
+Two-phase workflow. Phase 1 gets the sheet to ERC-clean; phase 2
+polishes it to look like a real schematic. Phase 2 is currently
+blocked on autoplacer bug #61 — until that's fixed, phase 1 is what
+ships.
 
-1. Place all components at rough starting coords (no need to hand-
-   optimise — autoplacer will move them; just avoid pin-coord
-   collisions by spacing >7.62 mm apart).
-2. Wire everything with `connect_pins(style="label")` — one call per
-   net. For failures (e.g. dense pin clusters), fall back to
-   per-pin `add_schematic_net_label` with `componentRef` + `pinNumber`.
+**Phase 1 — get to ERC-clean:**
+
+1. Place all components at ≥15.24 mm vertical spacing per column
+   (see `[[feedback_schematic_vertical_spacing]]`). Tighter than
+   that on the same X bridges nets via label stubs.
+2. Wire every net with `connect_pins(style="label")`. This is the
+   RELIABLE-BUT-UGLY fallback: one label per pin, no real wires.
+   Use it here because auto routing on unrefined placement often
+   crosses symbols. For dense pin clusters that fail, fall back
+   to per-pin `add_schematic_net_label(componentRef=…, pinNumber=…)`.
    Add `no_connect` for intentional NC pins.
-3. Add global labels for cross-sheet nets (BAT+, GND, etc.) via
-   `add_schematic_net_label(labelType="global_label")`.
-4. Run `autoplace_schematic` with compact params + reduced iterations.
-5. **After autoplace, re-run step 2 to restore labels/wires** — the
-   current apply/rewire flow strips them silently (#61).
-6. `run_erc` to validate.
+3. Add `labelType="global_label"` for cross-sheet nets (BAT+, GND,
+   VOUT_12V, VBUS_9V, VSYS, etc.) at existing local-label positions
+   so BFS merges them.
+4. Add `power:PWR_FLAG` on any global net whose only source is a
+   Passive pin (Cin pos-terminal, cell-holder terminal, etc.) —
+   ERC's "Input Power pin not driven" needs a Power_Output somewhere
+   on the net.
+5. `run_erc` to validate. Expect cosmetic warnings (Unspecified/
+   Passive pin-type mismatches, local↔global label pairs — both
+   intentional).
+
+**Phase 2 — polish to real schematic (BLOCKED on #61 today):**
+
+6. `autoplace_schematic` with compact params + reduced iterations.
+   Blocks on #61: the apply/rewire flow silently strips labels+wires
+   on real sheets, and the compact profile still over-spreads.
+7. After autoplace stabilises coords, re-run each signal net through
+   `connect_pins(style="auto")` per `[[feedback_schematic_routing]]`
+   to convert labels → routed wires. Power nets stay as labels via
+   the built-in `powerNets` behaviour.
+8. `run_erc` again to catch any bridges the auto-router introduced.
 
 ## RESUME HERE — end of session 2026-07-03 (previous)
 
