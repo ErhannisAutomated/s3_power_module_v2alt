@@ -4,7 +4,89 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
-## RESUME HERE — end of session 2026-07-05
+## RESUME HERE — end of session 2026-07-06
+
+**Schematic is fully committed, sourcing-clean, autoplaced + rewired,
+and pre-fab-gate green.** Ready for PCB drafting next session.
+
+### What landed today
+
+Project (main):
+- `61ae57b` — post-hoc rewrite of sub-sheet `(instances)` paths so
+  KiCad shows real refs instead of `C?/R?/U?` in the project view.
+  This was the first symptom of the hierarchical-path bug.
+- `0b2cfa5` — autoplaced + rewired all four sub-sheets with the
+  shipped default recipe (`PLACER.recipe()`, peak repulsion ≈ 51).
+  Real routed wires visible now instead of the label-only stub-sea
+  the hand-laid grid produced.  ERC clean.  Bboxes grew 1.4-2× vs.
+  hand grid but the tradeoff is intentional — visible traces =
+  readable schematic.
+- `fed7f29` — post-hoc path-rewrite AGAIN because `apply()` was
+  still defaulting to standalone-mode and clobbering the paths.
+  Server-side fix landed in the same session (see #68 below).
+- `9120877` — buckboost Q1-Q4 = AON7544 (LCSC C315567), buckboost
+  R5 SLOPE = 20 k with a Notes property recording the LM5176 §9.3.7
+  calc, charger R1 100k/R8 33k updates.
+- `a8cf9ac` — full sourcing pass, 34/34 BOM lines carry
+  LCSC + MPN + Manufacturer + tuned footprint.  kicad-happy SS-001
+  pre-fab gate CLEARED.
+
+MCP server (develop, 6 commits ready to push):
+- `ed1f8e2` — global_labels now survive `rewire_session`.  Was the
+  primary blocker of any real cross-sheet autoplace pass (yesterday's
+  #61 primary complaint).
+- `54d788f` — `load_session.pin_world` stored unrounded so
+  `walk_wire_chain` sees actual pin coords.  Q_NMOS gates at
+  y=95.885 were being rounded to 95.89, dropping the pin from
+  `sess.nets`.  Was the second blocker (#65).
+- `7572032` — `add_schematic_component` writes the correct
+  hierarchical `(instances)` path when placing on a sub-sheet (#67).
+- `8c69f2e` — refreshed `autoplacer_tuning.ipynb` for current API +
+  added `autoplacer_tuning.py` copy-pasteable script.
+- `1cea793` — added rotation-snap-force cell after user feedback,
+  documented preview vs. apply distinction.
+- `269f2a5` — `apply_to_schematic` now auto-detects hierarchical
+  mode from a target's parent .kicad_pro (#68).  No more post-hoc
+  path-rewrite needed after autoplace passes.
+
+### Where the design stands
+
+- **All four sheets** — ERC clean, autoplaced, rewired with real
+  traces, and every BOM line has LCSC + MPN + Footprint.
+- **1 kicad-happy error remaining is a known false positive**:
+  PP-001 flags LM5176 pin 23 (VCC) as "no DC path to a power rail",
+  but VCC is the LM5176's internal 5V LDO OUTPUT — the KiCad symbol
+  lib declares it as `power_in` incorrectly.  Safe to ignore or
+  suppress; no fix needed.
+- **DS-002 warning** (no local datasheets directory) is nice-to-have
+  for a full review pass but non-blocking.  Every part has a
+  datasheet URL in its property block; only the local PDF sync is
+  missing.
+
+### Next session
+
+**PCB drafting.** Roughly:
+1. `annotate_schematic` (sanity — refs are already correct via
+   61ae57b + 269f2a5 combo, but the tool should be a no-op now).
+2. `export_bom` — sanity-check the BOM matches the design table
+   in `a8cf9ac`'s commit body.
+3. `sync_schematic_to_board` to seed the .kicad_pcb.
+4. `add_board_outline` — probably 60×80 mm rectangle to start;
+   size will be driven by 18650 holder + USB-C connector geometry
+   once components are placed.
+5. `set_design_rules` — 4-layer stackup, GND@L2, PWR@L3 per
+   [[feedback-pcb-stackup]].
+6. Autoplace or hand-place components — 18650 holder + USB-C
+   receptacle define the mechanical outline.
+7. `freerouting` autorouting with the layer order from
+   [[feedback-4layer-routing-order]] (F.Cu → B.Cu → In2 → In1).
+8. DRC + PCB pre_fab checks (kicad-happy `analyze_pcb.py`).
+9. Gerber + fab-ready package.
+
+Big session — probably 2-3 hours of iterative work.  Component MPN
+picks + footprints are all locked so the sync should be clean.
+
+## RESUME HERE — end of session 2026-07-05 (previous)
 
 **Charger sheet shipped today** as commit `8c2cb62` on `main`. IP2326 +
 support network, 19 components, ERC clean apart from cosmetic
