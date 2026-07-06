@@ -4,6 +4,34 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
+## RESUME HERE — mid-session 2026-07-08
+
+**Step 1 of PCB drafting complete (schematic sanity + hierarchical
+ref disambiguation).** All 76 sub-sheet refs suffixed with
+`_{SHEETNAME}{instance_num}` to fix kicad-cli's `schematic has
+annotation errors` warning.  BOM now correctly shows 38 grouped rows
+(previously collapsed 4 U1's into one row).  MCP tool
+`annotate_schematic` was extended with a hierarchical disambiguation
+pass — see memory `feedback_hierarchical_annotate`.
+
+**In-flight:** Step 2 next — `sync_schematic_to_board` to seed the
+.kicad_pcb (currently still an 86-line template).
+
+**MCP server changes** (uncommitted, on develop):
+- New: `python/commands/hierarchical_annotate.py` + tests.
+- Extended: `_handle_annotate_schematic` in `python/kicad_interface.py`
+  to walk sub-sheets, resolve `?` refs per-sheet, then run the
+  hierarchical suffix pass.
+- Updated: `src/tools/schematic.ts` schema description.
+
+**Project changes** (uncommitted, on main):
+- All 4 sub-sheet .kicad_sch files have suffixed refs.
+- `bom_step1.csv` regenerated at project root.
+
+Restart MCP (`/mcp restart`) before calling annotate_schematic through
+the MCP surface so the new schema is live; direct Python calls have
+already been used to unblock this session.
+
 ## RESUME HERE — end of session 2026-07-06
 
 **Schematic is fully committed, sourcing-clean, autoplaced + rewired,
