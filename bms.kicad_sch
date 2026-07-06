@@ -420,7 +420,7 @@
 
 (property "Value" "BH-18650-B5BA016" (at 229.86999999999998 80.00999999999999 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 232.41 80.00999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "power_module_lib:BAT-SMD_BH-18650-B5BA016" (at 232.41 80.00999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 232.41 80.00999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 

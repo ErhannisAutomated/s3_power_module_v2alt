@@ -614,7 +614,7 @@
 
 (property "Value" "10uF" (at 147.32000000000002 115.56999999999998 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 147.32000000000002 113.02999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 147.32000000000002 113.02999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 147.32000000000002 113.02999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -630,7 +630,7 @@
 
 (property "Value" "10uF" (at 224.79000000000002 114.3 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 224.79000000000002 111.76 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 224.79000000000002 111.76 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 224.79000000000002 111.76 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -646,7 +646,7 @@
 
 (property "Value" "24k" (at 185.42000000000002 157.48 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 185.42000000000002 154.94 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 185.42000000000002 154.94 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 185.42000000000002 154.94 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 

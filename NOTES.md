@@ -4,33 +4,44 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
-## RESUME HERE — mid-session 2026-07-08
+## RESUME HERE — mid-session 2026-07-08 (through Step 2)
 
-**Step 1 of PCB drafting complete (schematic sanity + hierarchical
-ref disambiguation).** All 76 sub-sheet refs suffixed with
-`_{SHEETNAME}{instance_num}` to fix kicad-cli's `schematic has
-annotation errors` warning.  BOM now correctly shows 38 grouped rows
-(previously collapsed 4 U1's into one row).  MCP tool
-`annotate_schematic` was extended with a hierarchical disambiguation
-pass — see memory `feedback_hierarchical_annotate`.
+**Steps 1+2 of PCB drafting complete.**  Schematic is disambiguated,
+every non-power symbol has Footprint set, and all 76 components have
+been imported into the .kicad_pcb with 60 nets and 245 pads assigned.
 
-**In-flight:** Step 2 next — `sync_schematic_to_board` to seed the
-.kicad_pcb (currently still an 86-line template).
+- Step 1 (schematic sanity): all 76 sub-sheet refs now suffixed with
+  `_{SHEETNAME}{instance_num}` to fix kicad-cli's `schematic has
+  annotation errors` warning.  BOM now shows 38 grouped rows.  See
+  memory `feedback_hierarchical_annotate` for the tool that ships it.
+- Step 2 (sync_schematic_to_board): imported 76/76 footprints.
+  Required a footprint-completion pass first — the sourcing pass in
+  the prior session had set LCSC/MPN on ~35 passives but not Footprint,
+  and `sync_schematic_to_board` silently drops footprint-less rows.
+  Also: BAT1's footprint name was `BH-18650-B5BA016` but the local lib
+  has it as `BAT-SMD_BH-18650-B5BA016`; and L1_BUCKBOOST1 needed the
+  `_7.25x6.5mm` size suffix.  New MCP tool
+  `check_sourcing_readiness` will catch these three failure modes in
+  one call going forward — see memory `feedback-hierarchical-annotate`
+  for the pattern, and `project-sync-retroactive-import` for the
+  backlog item to make sync also retro-import.
 
-**MCP server changes** (uncommitted, on develop):
-- New: `python/commands/hierarchical_annotate.py` + tests.
-- Extended: `_handle_annotate_schematic` in `python/kicad_interface.py`
-  to walk sub-sheets, resolve `?` refs per-sheet, then run the
-  hierarchical suffix pass.
-- Updated: `src/tools/schematic.ts` schema description.
+**In-flight:** Step 3 next — `add_board_outline` (~60×80 mm rectangle
+to start) + `set_design_rules` for 4-layer GND@In1 PWR@In2 stackup.
 
-**Project changes** (uncommitted, on main):
-- All 4 sub-sheet .kicad_sch files have suffixed refs.
-- `bom_step1.csv` regenerated at project root.
+**MCP server changes** (uncommitted, on develop, sitting on top of
+  c529efa):
+- New: `python/commands/sourcing_readiness.py`
+  (`check_sourcing_readiness` handler) + tests + registry + TS schema.
+- Updated: `docs/PCB_DESIGN_WORKFLOW.md` "Assign Part Metadata"
+  section.
 
-Restart MCP (`/mcp restart`) before calling annotate_schematic through
-the MCP surface so the new schema is live; direct Python calls have
-already been used to unblock this session.
+**Project changes** (uncommitted, on main, sitting on top of 8941242):
+- 35 Footprint properties set across bms/charger/input/buckboost.
+- BAT1_BMS1 → `power_module_lib:BAT-SMD_BH-18650-B5BA016`.
+- L1_BUCKBOOST1 → `Inductor_SMD:L_Sumida_CDMC6D28_7.25x6.5mm`.
+- .kicad_pcb resynced from empty template — carries 76 footprints
+  at the default y=-140..-20 grid (no manual placement yet).
 
 ## RESUME HERE — end of session 2026-07-06
 

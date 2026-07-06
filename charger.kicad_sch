@@ -222,7 +222,7 @@
 
 (property "Value" "10uF" (at 166.37 176.53 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 166.37 173.99 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 166.37 173.99 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 166.37 173.99 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -238,7 +238,7 @@
 
 (property "Value" "22uF" (at 222.25 140.97000000000003 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 222.25 138.43 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 222.25 138.43 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 222.25 138.43 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -254,7 +254,7 @@
 
 (property "Value" "22uF" (at 243.84 130.81 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 243.84 128.26999999999998 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 243.84 128.26999999999998 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 243.84 128.26999999999998 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -270,7 +270,7 @@
 
 (property "Value" "10uF" (at 262.89 96.52 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 262.89 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0805_2012Metric" (at 262.89 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 262.89 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -286,7 +286,7 @@
 
 (property "Value" "100nF" (at 207.01 168.91 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 209.55 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Capacitor_SMD:C_0603_1608Metric" (at 209.55 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 209.55 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -302,7 +302,7 @@
 
 (property "Value" "100k" (at 82.55 93.97999999999999 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 85.09 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 85.09 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 85.09 93.97999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -320,7 +320,7 @@
 
 (property "Value" "10k" (at 193.04000000000002 86.36000000000001 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 195.58 86.36000000000001 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 195.58 86.36000000000001 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 195.58 86.36000000000001 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -352,7 +352,7 @@
 
 (property "Value" "10k" (at 215.9 105.41 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 215.9 107.94999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 215.9 107.94999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 215.9 107.94999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -384,7 +384,7 @@
 
 (property "Value" "4.7k" (at 191.76999999999998 35.56 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 194.31 35.56 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 194.31 35.56 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 194.31 35.56 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -400,7 +400,7 @@
 
 (property "Value" "100k" (at 45.71999999999999 118.10999999999999 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 48.26 118.10999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 48.26 118.10999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 48.26 118.10999999999999 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -416,7 +416,7 @@
 
 (property "Value" "100k" (at 33.019999999999996 160.01999999999998 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 33.019999999999996 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 33.019999999999996 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 33.019999999999996 157.48 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -432,7 +432,7 @@
 
 (property "Value" "100k" (at 93.98 137.16000000000003 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 93.98 134.62 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 93.98 134.62 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 93.98 134.62 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -448,7 +448,7 @@
 
 (property "Value" "1k" (at 105.41000000000001 172.72000000000003 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 105.41000000000001 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 105.41000000000001 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 105.41000000000001 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -464,7 +464,7 @@
 
 (property "Value" "33k" (at 68.58 172.72000000000003 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 68.58 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 68.58 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 68.58 170.18 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
@@ -482,7 +482,7 @@
 
 (property "Value" "100k" (at 139.70000000000002 168.91 0) (effects (font (size 1.27 1.27)))) 
 
-(property "Footprint" "" (at 142.24 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
+(property "Footprint" "Resistor_SMD:R_0603_1608Metric" (at 142.24 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
 (property "Datasheet" "~" (at 142.24 168.91 0) (effects (font (size 1.27 1.27)) (hide yes))) 
 
