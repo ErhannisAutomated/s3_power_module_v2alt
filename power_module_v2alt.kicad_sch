@@ -970,6 +970,15 @@
 				(hide yes)
 			)
 		)
+		(property "mcp_expected_netclass_patterns" "[{\"netclass\":\"POWER_5A\",\"pattern\":\"BAT+\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"VOUT_12V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_RAW\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_9V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VSYS\"}]"
+			(at 12.7 12.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(instances
 			(project "power_module_v2alt"
 				(path "/b266f3b8-db6b-493d-8968-5af48ab0203e"
