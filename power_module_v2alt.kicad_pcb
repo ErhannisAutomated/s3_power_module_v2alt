@@ -17994,7 +17994,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18016,7 +18016,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18038,7 +18038,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18060,7 +18060,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18082,7 +18082,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18104,7 +18104,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18126,7 +18126,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18148,7 +18148,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18170,7 +18170,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18192,7 +18192,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18214,7 +18214,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18236,7 +18236,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18258,7 +18258,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18280,7 +18280,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18302,7 +18302,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18324,7 +18324,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18346,7 +18346,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18368,7 +18368,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18390,7 +18390,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18412,7 +18412,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18434,7 +18434,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
@@ -18456,7 +18456,7 @@
 		(hatch edge 0.5)
 		(priority 100)
 		(connect_pads yes
-			(clearance 0.5)
+			(clearance 0.08)
 		)
 		(min_thickness 0.25)
 		(filled_areas_thickness no)
