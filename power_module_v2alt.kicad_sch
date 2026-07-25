@@ -970,7 +970,7 @@
 				(hide yes)
 			)
 		)
-		(property "mcp_expected_netclass_patterns" "[{\"netclass\":\"POWER_5A\",\"pattern\":\"BAT+\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"VOUT_12V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_RAW\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_9V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VSYS\"}]"
+		(property "mcp_expected_netclass_patterns" "[{\"netclass\":\"POWER_5A\",\"pattern\":\"BAT+\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"BAT-\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"CELL1_TOP\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"CELL2_TOP\"},{\"netclass\":\"POWER_5A\",\"pattern\":\"VOUT_12V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_RAW\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VBUS_9V\"},{\"netclass\":\"POWER_2A\",\"pattern\":\"VSYS\"}]"
 			(at 12.7 12.7 0)
 			(effects
 				(font

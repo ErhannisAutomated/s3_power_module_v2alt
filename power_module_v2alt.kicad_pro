@@ -535,6 +535,18 @@
       {
         "netclass": "POWER_2A",
         "pattern": "VSYS"
+      },
+      {
+        "netclass": "POWER_5A",
+        "pattern": "BAT-"
+      },
+      {
+        "netclass": "POWER_5A",
+        "pattern": "CELL1_TOP"
+      },
+      {
+        "netclass": "POWER_5A",
+        "pattern": "CELL2_TOP"
       }
     ]
   },
