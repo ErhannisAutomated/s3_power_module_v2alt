@@ -4,6 +4,48 @@ Living document; updated at the end of each session so the next session
 can pick up from a cold start (after Claude Code context compaction).
 Same convention as v1's `../power_module/NOTES.md`.
 
+## RESUME HERE — end of session 2026-07-26 (pivot to sim-harness project)
+
+**Halted at Step 7 (post-route finisher).**  Board has 24 unrouted
+stragglers (cell-sense wires, signal-level, GND pin-zone gaps) — the
+easy autoroute pass is done, hand-cleanup is deferred.
+
+**More important — three LM5176 schematic bugs discovered by user
+reading the actual datasheet (SNVSAI1D, 2017-2021).**  My earlier
+"§9.3.7 slope-comp calc" note on R5 was a fabricated citation from a
+prior session.  See [[project-lm5176-bugs-to-fix]] for the full pin-
+by-pin diff and the fix list.
+
+**Root cause: no verification loop.**  I was working from vague memory
+without ground truth, and my hallucinations went unchallenged.  User
+proposed a design-verification harness modelled on software testing
+(cheap-to-expensive layer pyramid + LLM-extracted component models
+with multi-agent extraction for confidence).  Full plan in
+[[project-sim-harness]].
+
+**On Monday**
+
+Start a fresh session with the sim-harness project.  Use LM5176 as the
+pilot — we already have datasheet, known bugs, and a clear right-answer
+target.  Once the harness catches the 3 bugs it needs to catch, fix the
+v2alt schematic through the harness (proving the loop works).  Then
+extract JSON models for the other four hard ICs (BQ76920, IP2326,
+CH224K, AON7544) in parallel with continuing the layout finisher work
+on v2alt.
+
+The power module continues as a test case; it's never been the goal.
+The goal is a working environment + process for PCB development
+against LLM design assistance.
+
+**Uncommitted state** — none.  Working tree clean at commit `b120cfb`.
+
+**Not commit-blocking, but worth flagging** — Step 7 hand-cleanup work
+(the 24 stragglers) is superseded in importance by the harness project
+and the schematic bug fix.  Once the LM5176 fix lands (adds ~3-5
+components: RSENSE, C_SLOPE, RMODE, maybe ISNS shunt), the schematic
+changes will bump the netlist and we'll re-sync and re-route anyway.
+Don't waste effort finishing the current route.
+
 ## RESUME HERE — mid-session 2026-07-08 (through Step 2)
 
 **Steps 1+2 of PCB drafting complete.**  Schematic is disambiguated,
